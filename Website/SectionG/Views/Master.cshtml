@@ -5,6 +5,9 @@
     // Roots
     var site = Model.Content.AncestorOrSelf("Site");
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    SectionG.Code.Utilities.ManageLanguageCookie(lang.Name.ToLowerInvariant(), Response);
+    
 }
 
 <!DOCTYPE html>
