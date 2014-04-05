@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using SectionG.Code
+@{
+    
+    Layout = "Master.cshtml";
+
+    // Get language from brower settings, defaults to english
+    var language = Enum.GetName(typeof(SectionG.Code.Language), Utilities.GetCurrentLanguageFromBrowser()).ToLowerInvariant();
+
+    // Then check in cookie
+    var languageCookie = HttpContext.Current.Request.Cookies["Language"];
+    if (languageCookie != null)
+    {
+        language = languageCookie.Value.ToLowerInvariant();
+    }
+    else
+    {
+        // Since no cookie exists, let's set one.
+        languageCookie = new HttpCookie("Language");
+        languageCookie.Value = language;
+        languageCookie.Expires = DateTime.Now.AddDays(10);
+        Response.SetCookie(languageCookie);
+    }
+
+    // Get the node to redirect to
+    var lang = Model.Content.Children().SingleOrDefault(x => x.Name.ToLowerInvariant() == language);
+    Response.Redirect(lang.Url);
+    
+}

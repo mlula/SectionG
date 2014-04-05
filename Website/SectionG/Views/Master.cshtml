@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    
+    <title>@lang.AsDynamic().titre</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="icon" type="image/gif" href="/Images/favicon.gif" />
+
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+    <link rel="stylesheet" href="/Css/style.css">
+
+</head>
+<body>
+
+    <h1>Master</h1>
+    <div class="box">
+        @RenderBody()
+    </div>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/main.js"></script>
+
+</body>
+</html>
