@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    
+    Layout = "Master.cshtml";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    var lease = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Bail");
+    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");
+
+    var leaseText = "Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
+    var registryText = "Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
+    if (lang.Name.ToLowerInvariant() == "en")
+    {
+        leaseText = "[EN] Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
+        registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
+    }
+}
+
+@Html.Partial("/Views/Partials/SmallHeader.cshtml")
+
+<hr />
+
+<div>
+    <h4>Consultez le registre volontaire des baux.</h4>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque commodo odio posuere venenatis. In ut leo et tortor hendrerit scelerisque. Maecenas sed faucibus purus. Proin sit amet lorem felis. In vel dapibus arcu, posuere fringilla erat.</p>
+</div>
+
+<hr />
+
+<div>...</div>
