@@ -2786,6 +2786,11 @@
     <Content Include="Views\AccueilLangage.cshtml" />
     <Content Include="Views\Master.cshtml" />
     <Content Include="Views\Site.cshtml" />
+    <Content Include="Views\Partials\SmallHeader.cshtml" />
+    <Content Include="Views\Partials\Footer.cshtml" />
+    <Content Include="Views\Partials\BigHeader.cshtml" />
+    <Content Include="Views\Bail.cshtml" />
+    <Content Include="Views\Registre.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2803,7 +2808,6 @@
     <Folder Include="obj\" />
     <Folder Include="UserControls\" />
     <Folder Include="Views\MacroPartials\" />
-    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

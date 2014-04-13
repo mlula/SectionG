@@ -1,0 +1,79 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    
+    Layout = "";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    var lease = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Bail");
+    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");
+
+    var home = "Accueil";
+    if (lang.Name.ToLowerInvariant() == "en")
+    {
+        home = "Home";
+    }
+
+    var leaseClass = "";
+    if (Model.Content.Id == lease.Id) {
+        leaseClass = "active";
+    }
+
+    var registryClass = "";
+    if (Model.Content.Id == registry.Id)
+    {
+        registryClass = "active";
+    }
+    
+}
+
+<header style="text-align: center; position: relative;">
+
+    <div style="position: absolute; right: 0px; padding-top: 30px;">
+        <a href="javascript: void(0);">Contact</a> | 
+        @if (lang.Name.ToLowerInvariant() == "en")
+        {
+            <a href="/fr/">Français</a>
+        }
+        else
+        {
+            <a href="/en/">Anglais</a>
+        }
+    </div>
+
+    <div style="padding-top: 30px;">
+        <img src="http://placehold.it/300x160" alt="@lang.AsDynamic().titre"/>
+        <h1>@lang.AsDynamic().titre</h1>
+    </div>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@lang.Url">@home</a></li>
+                        <li class="@leaseClass"><a href="@lease.Url">Lease</a></li>
+                        <li class="@registryClass"><a href="@registry.Url">Registry</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+
+</header>

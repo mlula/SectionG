@@ -1,5 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
+    
     Layout = null;
 
     // Roots
@@ -11,9 +12,10 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="@lang.Name.ToLowerInvariant()">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <title>@lang.AsDynamic().titre</title>
 
@@ -21,20 +23,39 @@
 
     <link rel="icon" type="image/gif" href="/Images/favicon.gif" />
 
-    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    @*<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">*@
     
     <link rel="stylesheet" href="/Css/style.css">
 
 </head>
 <body>
+        
+    <div class="container">
 
-    <h1>Master</h1>
-    <div class="box">
         @RenderBody()
+
+        @Html.Partial("/Views/Partials/Footer.cshtml")
+
     </div>
 
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="/Scripts/main.js"></script>
+
+    @RenderSection("Scripts", false)
 
 </body>
 </html>

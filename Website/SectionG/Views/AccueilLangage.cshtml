@@ -1,6 +1,58 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
+    
     Layout = "Master.cshtml";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    var lease = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Bail");
+    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");
+
+    var leaseText = "Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
+    var registryText = "Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
+    if (lang.Name.ToLowerInvariant() == "en")
+    {
+        leaseText = "[EN] Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
+        registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
+    }
 }
 
-<div>Hello World</div>
+@Html.Partial("/Views/Partials/BigHeader.cshtml")
+
+<div class="row">
+
+    <div class="col-xs-6">
+        <div class="homeBox">
+            <img class="homeBoxImage" src="http://placehold.it/220x100" alt="@lease.AsDynamic().titre"/>
+            <p class="text homeBoxText">@leaseText</p>
+            <div class="homeBoxButton"><a class="btn btn-lg btn-default" href="@lease.Url" role="button">@lease.AsDynamic().titre</a></div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <div class="homeBox">
+            <img class="homeBoxImage" src="http://placehold.it/220x100" alt="@registry.AsDynamic().titre"/>
+            <p class="text homeBoxText">@registryText</p>
+            <div class="homeBoxButton"><a class="btn btn-lg btn-default" href="@registry.Url" role="button">@registry.AsDynamic().titre</a></div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+
+        /*$(document).ready(function () {
+            var maxHeight = 0;
+            $('.homeBox').each(function () {
+                maxHeight = Math.max(maxHeight, $(this).height());
+                maxHeight = maxHeight + 55 + 10 + 2;
+                console.log("maxHeight: " + maxHeight);
+            });
+            $('.homeBox').css({ height: maxHeight + 'px' });
+        });*/
+
+    </script>
+}

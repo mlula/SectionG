@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    
+    Layout = "";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+    
+}
+
+<header style="text-align: center; position: relative;">
+
+    <div style="position: absolute; right: 0px; padding-top: 30px;">
+        <a href="javascript: void(0);">Contact</a> | 
+        @if (lang.Name.ToLowerInvariant() == "en")
+        {
+            <a href="/fr/">Français</a>
+        }
+        else
+        {
+            <a href="/en/">Anglais</a>
+        }
+    </div>
+
+    <div style="padding-top: 30px;">
+        <img src="http://placehold.it/300x160" alt="@lang.AsDynamic().titre"/>
+        <h1>@lang.AsDynamic().titre</h1>
+    </div>
+
+    <hr />
+    <p class="lead">Bienvenue sur le registre volontaire des baux.</p>
+    <p class="text">Vivamus quis est magna. Proin id venenatis augue. Vivamus mattis magna lobortis nunc condimentum, eu dignissim sem elementum.</p>
+    <hr />
+
+</header>
