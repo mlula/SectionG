@@ -1,4 +1,7 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using SectionG.Code.Pocos;
+@using Umbraco.Core.Persistence;
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     
     Layout = "Master.cshtml";
@@ -17,7 +20,37 @@
         leaseText = "[EN] Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
         registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
     }
+
+    // Get the current database object
+    var db = ApplicationContext.Current.DatabaseContext.Database;
+    // Fetch a collection of contacts from the db.
+    
+    var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease"));
 }
+<link rel="stylesheet" href="~/Css/grid.css">
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/grid.js"></script>
+
+<script type="text/javascript">
+    /* Table initialisation */
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row'<'span3'l><'span6'f>r>t<'row'<'span3'i><'span6'p>>",
+            "sPaginationType": "bootstrap",
+            "aLengthMenu": [5, 10, 25, 50],
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ items par page",
+                "sInfo": "Montrer de _START_ à _END_ de _TOTAL_ entrées",
+                "sSearch": "Rechercher",
+                "oPaginate": {
+                    "sPrevious": "Précédent",
+                    "sNext": "Suivant"
+                }
+            }
+        });
+    });
+</script>
 
 @Html.Partial("/Views/Partials/SmallHeader.cshtml")
 
@@ -30,4 +63,24 @@
 
 <hr />
 
-<div>...</div>
+<div>
+    <table class="table table-striped table-bordered" id="example">
+        <thead>
+            <tr>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Adresse IP</th>
+            </tr>
+            </thead>
+        <tbody role="alert">
+            @foreach (Lease leaseItem in listOfLeases)
+            {
+                <tr>
+                    <td>@leaseItem.Price $</td>
+                    <td>@leaseItem.DateCreated.ToString("dd MMMM yyyy")</td>
+                    <td>@leaseItem.IpAddress</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
