@@ -19,6 +19,21 @@
     }
 }
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#datepickerDebut").datepicker({
+                altField: "#dateDebutAlt",
+                altFormat: "DD, d MM, yy"
+            });
+            $("#datepickerFin").datepicker({
+                altField: "#dateFinAlt",
+                altFormat: "DD, d MM, yy"
+            });
+        });
+    </script>
+}
+
 @Html.Partial("/Views/Partials/SmallHeader.cshtml")
 
 <div>
@@ -28,27 +43,73 @@
 
 <hr />
 
-@* $('#lease').submit()" *@
+<form id="lease" onsubmit="return false;">
 
-<form id="lease" onsubmit="return submitLease(); return false;">
-
-    <div id="step1">
+    <div id="step1" class="step">
         <h2>Step 1</h2>
-        <div><input id="Adresse" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required=""></div>
-        <div><input id="Appt" name="Appt" type="text" placeholder="Appt." class="form-control input-md" required=""></div>
-        <div><input id="Rue" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required=""></div>
-        <div><input id="CodePostal" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required=""></div>
-        <div><input id="Ville" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required=""></div>
-        <div><input id="Province" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required=""></div>
-        <div><button id="submit" name="submit" class="btn btn-primary" onclick="$('#step1').hide(); $('#step2').show();">Button</button></div>
-    </div>
-    <div id="step2" style="display: none;">
 
+        @Html.Partial("/Views/Partials/AddressFields.cshtml")
+
+        <div><button id="submit1" name="submit1" class="btn btn-primary" onclick="$('#step1').hide(); $('#step2').show();">Button</button></div>
     </div>
-    <div id="step3" style="display: none;"></div>
-    <div id="step4" style="display: none;"></div>
+
+    <div id="step2" class="step" style="display: none;">
+        <h2>Step 2</h2>
+        <div id="datepickerDebut" style="float: left;">debut</div>
+        <div id="dateDebut" style="float: left; margin-left: 10px; width: 250px;">
+            <input id="dateDebutAlt" class="form-control" style="width: 100%; padding-left: 10px;" readonly="readonly" />
+        </div>
+        <br clear="all" />
+        <br />
+        <div id="datepickerFin" style="float: left;">fin</div>
+        <div id="dateFin" style="float: left; margin-left: 10px; width: 250px;">
+            <input id="dateFinAlt" class="form-control" style="width: 100%; padding-left: 10px;" readonly="readonly" />
+        </div>
+        <br clear="all" />
+        <br />
+        <div><input id="Prix" name="Prix" type="text" placeholder="Prix" class="form-control input-md"></div>
+        <div><button id="submit2" name="submit2" class="btn btn-primary" onclick="$('#step2').hide(); $('#step3').show();">Button</button></div>
+    </div>
+
+    <div id="step3" style="display: none;" class="step">
+        <h2>Step 3</h2>
+        <div><textarea class="form-control" id="details" name="details">details...</textarea></div>        
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-1" value="1"><label for="checkboxes-1">Option 1</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-2" value="1"><label for="checkboxes-2">Option 2</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-3" value="1"><label for="checkboxes-3">Option 3</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-4" value="1"><label for="checkboxes-4">Option 4</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-5" value="1"><label for="checkboxes-5">Option 5</label></div>
+        <div><button id="submit3" name="submit3" class="btn btn-primary" onclick="submitLease();">Button</button></div>
+    </div>
+
+    <div id="step4" style="display: none;" class="step">
+        <h2>Step 4</h2>
+        <div>
+            Merci d'avoir participé au registre volontaire des baux, votre apport est précieux.<br />
+            <br />
+            Passez le mots dans vos réseau!
+        </div>
+        <div style="float: left; width: 150px;"><img src="~/Images/facebook-button.png" /></div>
+        <div style="float: left; width: 150px;"><img src="~/Images/twitter-button.png" /></div>
+        <br clear="all" />
+        <div><button id="submit4" name="submit4" class="btn btn-primary" onclick="goToRegistry();">Button</button></div>
+    </div>
 
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @*
 <div>

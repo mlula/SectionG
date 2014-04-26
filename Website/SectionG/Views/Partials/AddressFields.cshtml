@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    
+    Layout = "";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+    
+}
+
+<div><input id="Adresse" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md"></div>
+<div><input id="Appt" name="Appt" type="text" placeholder="Appt." class="form-control input-md"></div>
+<div><input id="Rue" name="Rue" type="text" placeholder="Rue" class="form-control input-md"></div>
+<div><input id="CodePostal" name="CodePostal" type="text" placeholder="CodePostal" class="form-control input-md"></div>
+<div><input id="Ville" name="Ville" type="text" placeholder="Ville" class="form-control input-md"></div>
+        
+<div>
+    <select id="Province" name="Province" class="form-control">
+        <option value="1">Option one</option>
+        <option value="2">Option two</option>
+    </select>
+</div>
