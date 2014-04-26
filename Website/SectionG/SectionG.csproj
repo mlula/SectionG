@@ -182,9 +182,25 @@
     <Content Include="bin\x86\sqlcese40.dll" />
     <Content Include="Config\Splashes\booting.aspx" />
     <Content Include="Config\Splashes\noNodes.aspx" />
+    <Content Include="Css\grid.css" />
     <Content Include="Css\style.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\grid\back_disabled.png" />
+    <Content Include="Images\grid\back_enabled.png" />
+    <Content Include="Images\grid\back_enabled_hover.png" />
+    <Content Include="Images\grid\favicon.ico" />
+    <Content Include="Images\grid\forward_disabled.png" />
+    <Content Include="Images\grid\forward_enabled.png" />
+    <Content Include="Images\grid\forward_enabled_hover.png" />
+    <Content Include="Images\grid\sort_asc.png" />
+    <Content Include="Images\grid\sort_asc_disabled.png" />
+    <Content Include="Images\grid\sort_both.png" />
+    <Content Include="Images\grid\sort_desc.png" />
+    <Content Include="Images\grid\sort_desc_disabled.png" />
+    <Content Include="Scripts\grid.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Umbraco\Actions\delete.aspx" />
     <Content Include="Umbraco\Actions\editContent.aspx" />
@@ -2630,7 +2646,9 @@
     <Content Include="Umbraco_Client\Ui\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Umbraco_Client\Ui\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Umbraco_Client\Ui\ui-lightness\jquery-ui.custom.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\PetaPoco.cs" />
@@ -2791,6 +2809,7 @@
     <Content Include="Views\Partials\BigHeader.cshtml" />
     <Content Include="Views\Bail.cshtml" />
     <Content Include="Views\Registre.cshtml" />
+    <Content Include="Images\grid\Sorting icons.psd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2822,13 +2841,12 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>56572</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:51239/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://sectiong.local</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
