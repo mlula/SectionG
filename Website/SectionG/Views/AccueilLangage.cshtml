@@ -8,7 +8,7 @@
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
 
     var lease = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Bail");
-    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");
+    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");    
 
     var leaseText = "Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
     var registryText = "Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";

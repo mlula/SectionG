@@ -28,15 +28,13 @@
     var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease"));
 }
 <link rel="stylesheet" href="~/Css/grid.css">
-<script src="~/Scripts/jquery.js"></script>
-<script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/grid.js"></script>
 
 <script type="text/javascript">
     /* Table initialisation */
     $(document).ready(function () {
-        $('#example').dataTable({
-            "sDom": "<'row'<'span3'l><'span6'f>r>t<'row'<'span3'i><'span6'p>>",
+        $('#example').dataTable({            
+            "sDom": "<'row'<'col-6'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>",
             "sPaginationType": "bootstrap",
             "aLengthMenu": [5, 10, 25, 50],
             "oLanguage": {
@@ -64,7 +62,7 @@
 <hr />
 
 <div>
-    <table class="table table-striped table-bordered" id="example">
+    <table class="table table-striped table-bordered" id="example" role="grid">
         <thead>
             <tr>
                 <th>Prix</th>
