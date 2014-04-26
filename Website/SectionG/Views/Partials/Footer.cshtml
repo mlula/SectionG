@@ -6,13 +6,22 @@
     // Roots
     var site = Model.Content.AncestorOrSelf("Site");
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    var menuNodes = lang.Children.Where(x => x.DocumentTypeAlias != "Bail" && x.DocumentTypeAlias != "Registre" && x.DocumentTypeAlias != "Contact");
+    var first = true;    
     
 }
 
 <hr />
 
 <footer style="text-align: center;">
-    Footer
+    @foreach(var menuNode in menuNodes) {
+        if (!first) {
+            <span> | </span>   
+        }
+        first = false;
+        <a href="@menuNode.Url">@menuNode.AsDynamic().titre</a>
+    }
 </footer>
 
 <br />

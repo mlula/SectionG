@@ -1,4 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    Layout = null;
+    Layout = "Master.cshtml";
 }
+
+@Html.Partial("/Views/Partials/SmallHeader.cshtml")
+
+<div>
+    <h4>@CurrentPage.titre</h4>
+    <div>Formulaire contact...</div>
+</div>
+
+<hr />

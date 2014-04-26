@@ -26,13 +26,15 @@
     {
         registryClass = "active";
     }
+
+    var contact = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Contact");
     
 }
 
 <header style="text-align: center; position: relative;">
 
     <div style="position: absolute; right: 0px; padding-top: 30px;">
-        <a href="javascript: void(0);">Contact</a> | 
+        <a href="@contact.Url">@contact.AsDynamic().titre</a> | 
         @if (lang.Name.ToLowerInvariant() == "en")
         {
             <a href="/fr/">Français</a>
@@ -44,7 +46,7 @@
     </div>
 
     <div style="padding-top: 30px;">
-        <img src="http://placehold.it/300x160" alt="@lang.AsDynamic().titre"/>
+        <a href="/"><img src="http://placehold.it/300x160" alt="@lang.AsDynamic().titre"/></a>
         <h1>@lang.AsDynamic().titre</h1>
     </div>
 
