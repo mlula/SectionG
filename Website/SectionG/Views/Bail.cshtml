@@ -12,14 +12,30 @@
 
     var leaseText = "Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
     var registryText = "Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
-    if (lang.Name.ToLowerInvariant() == "en") {
+    if (lang.Name.ToLowerInvariant() == "en")
+    {
         leaseText = "[EN] Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
-        registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";        
+        registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
     }
 }
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#datepickerDebut").datepicker({
+                altField: "#dateDebutAlt",
+                altFormat: "DD, d MM, yy"
+            });
+            $("#datepickerFin").datepicker({
+                altField: "#dateFinAlt",
+                altFormat: "DD, d MM, yy"
+            });
+        });
+    </script>
+}
+
 @Html.Partial("/Views/Partials/SmallHeader.cshtml")
-    
+
 <div>
     <h4>Remplissez le formulaire pour soumettre votre bail.</h4>
     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque commodo odio posuere venenatis. In ut leo et tortor hendrerit scelerisque. Maecenas sed faucibus purus. Proin sit amet lorem felis. In vel dapibus arcu, posuere fringilla erat.</p>
@@ -27,4 +43,154 @@
 
 <hr />
 
-<div>...</div>
+<form id="lease" onsubmit="return false;">
+
+    <div id="step1" class="step">
+        <h2>Step 1</h2>
+
+        @Html.Partial("/Views/Partials/AddressFields.cshtml")
+
+        <div><button id="submit1" name="submit1" class="btn btn-primary" onclick="$('#step1').hide(); $('#step2').show();">Button</button></div>
+    </div>
+
+    <div id="step2" class="step" style="display: none;">
+        <h2>Step 2</h2>
+        <div id="datepickerDebut" style="float: left;">debut</div>
+        <div id="dateDebut" style="float: left; margin-left: 10px; width: 250px;">
+            <input id="dateDebutAlt" class="form-control" style="width: 100%; padding-left: 10px;" readonly="readonly" />
+        </div>
+        <br clear="all" />
+        <br />
+        <div id="datepickerFin" style="float: left;">fin</div>
+        <div id="dateFin" style="float: left; margin-left: 10px; width: 250px;">
+            <input id="dateFinAlt" class="form-control" style="width: 100%; padding-left: 10px;" readonly="readonly" />
+        </div>
+        <br clear="all" />
+        <br />
+        <div><input id="Prix" name="Prix" type="text" placeholder="Prix" class="form-control input-md"></div>
+        <div><button id="submit2" name="submit2" class="btn btn-primary" onclick="$('#step2').hide(); $('#step3').show();">Button</button></div>
+    </div>
+
+    <div id="step3" style="display: none;" class="step">
+        <h2>Step 3</h2>
+        <div><textarea class="form-control" id="details" name="details">details...</textarea></div>        
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-1" value="1"><label for="checkboxes-1">Option 1</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-2" value="1"><label for="checkboxes-2">Option 2</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-3" value="1"><label for="checkboxes-3">Option 3</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-4" value="1"><label for="checkboxes-4">Option 4</label></div>
+        <div><input type="checkbox" name="checkboxes" id="checkboxes-5" value="1"><label for="checkboxes-5">Option 5</label></div>
+        <div><button id="submit3" name="submit3" class="btn btn-primary" onclick="submitLease();">Button</button></div>
+    </div>
+
+    <div id="step4" style="display: none;" class="step">
+        <h2>Step 4</h2>
+        <div>
+            Merci d'avoir participé au registre volontaire des baux, votre apport est précieux.<br />
+            <br />
+            Passez le mots dans vos réseau!
+        </div>
+        <div style="float: left; width: 150px;"><img src="~/Images/facebook-button.png" /></div>
+        <div style="float: left; width: 150px;"><img src="~/Images/twitter-button.png" /></div>
+        <br clear="all" />
+        <div><button id="submit4" name="submit4" class="btn btn-primary" onclick="goToRegistry();">Button</button></div>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+<div>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Registre</legend>
+
+            <div class="registreField">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Adresse">Adresse</label>
+                    <div class="col-md-4">
+                        <input id="Adresse" name="Adresse" type="text" placeholder="Adresse" class="form-control input-md" required="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="Appt">Appt.</label>
+                <div class="col-md-4">
+                    <input id="Appt" name="Appt" type="text" placeholder="Appt." class="form-control input-md">
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textarea">Text Area</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+                </div>
+            </div>
+
+            <!-- Multiple Checkboxes -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="checkboxes">Multiple Checkboxes</label>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label for="checkboxes-0">
+                            <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                            Option one
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="checkboxes-1">
+                            <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+                            Option two
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+                <div class="col-md-4">
+                    <select id="selectbasic" name="selectbasic" class="form-control">
+                        <option value="1">Option one</option>
+                        <option value="2">Option two</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <div class="col-md-4">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="button1id">Double Button</label>
+                <div class="col-md-8">
+                    <button id="button1id" name="button1id" class="btn btn-success">Good Button</button>
+                    <button id="button2id" name="button2id" class="btn btn-danger">Scary Button</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>
+*@

@@ -32,6 +32,11 @@
     text-align: center;
 }
 
+.step {
+    border: 1px solid black;
+    margin: 5px;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
     .container {
