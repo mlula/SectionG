@@ -1,4 +1,12 @@
-﻿function ajaxPost(url, data, callBack) {
+﻿function submitLease() {
+    console.log("submitLease!");
+    ajaxPost("/Umbraco/Surface/Main/SubmitLease/", "", function (result) {
+        console.log("submitLease: " + result);
+    })
+    return false;
+}
+
+function ajaxPost(url, data, callBack) {
     $.ajax({
         type: "POST",
         url: url,

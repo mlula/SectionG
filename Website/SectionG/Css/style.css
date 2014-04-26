@@ -32,6 +32,14 @@
     text-align: center;
 }
 
+.registreField {
+    padding: 5px;
+}
+
+    .registreField label {
+        width: 150px;
+    }
+
 /* Customize container */
 @media (min-width: 768px) {
     .container {
