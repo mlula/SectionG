@@ -66,6 +66,23 @@ namespace SectionG.SurfaceControllers
             lease.Price = price;
             lease.DateCreated = DateTime.Now;
             lease.IpAddress = Request.ServerVariables["REMOTE_ADDR"];
+            
+            lease.StartDate = new DateTime(2014, 7, 1);
+            lease.EndDate = new DateTime(2015, 7, 1);
+            lease.AddressNbr = "";
+            lease.Street = "";
+            lease.AppartmentNbr = "";
+            lease.Street = "";
+            lease.PostalCode = "";
+            lease.City = "Montréal";
+
+            Borough borough = new Borough();
+            borough.Id = 9;
+            borough.Name = "Mercier–Hochelaga-Maisonneuve";
+            lease.Borough = borough;
+            lease.Details = "";
+            lease.Inclusions = "";
+
             db.Insert(lease);
 
             return Content("ok");

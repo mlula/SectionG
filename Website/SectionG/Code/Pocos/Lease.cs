@@ -14,5 +14,15 @@ namespace SectionG.Code.Pocos
         public int Price { get; set; }
         public DateTime DateCreated { get; set; }
         public string IpAddress { get; set; }
+        public string AddressNbr { get; set; }
+        public string AppartmentNbr { get; set; }
+        public string Street { get; set; }
+        public string PostalCode { get; set; }
+        public string City { get; set; }
+        public Borough Borough { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string Details { get; set; }
+        public string Inclusions { get; set; }
     }
 }

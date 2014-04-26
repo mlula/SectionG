@@ -2661,6 +2661,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\PetaPoco.cs" />
+    <Compile Include="Code\Pocos\Borough.cs" />
     <Compile Include="Code\Pocos\Lease.cs" />
     <Compile Include="Code\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
