@@ -16,6 +16,8 @@ using System.Net.Mail;
 using Umbraco.Core;
 using Umbraco.Web;
 using Newtonsoft.Json.Linq;
+using PetaPoco;
+
 namespace SectionG.SurfaceControllers
 {
     public class MainController : Umbraco.Web.Mvc.SurfaceController
@@ -70,5 +72,13 @@ namespace SectionG.SurfaceControllers
             
         }
 
+        [System.Web.Mvc.HttpPost]
+        public ActionResult GetLeases()
+        {            
+            var db = new PetaPoco.Database("umbracoDbDSN");
+            var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease"));
+
+            return Json(listOfLeases);
+        }
     }
 }

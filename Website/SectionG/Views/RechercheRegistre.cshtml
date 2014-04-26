@@ -1,0 +1,25 @@
+﻿@using SectionG.Code.Pocos;
+@using Umbraco.Core.Persistence;
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    
+    Layout = "Master.cshtml";
+
+    // Roots
+    var site = Model.Content.AncestorOrSelf("Site");
+    var lang = Model.Content.AncestorOrSelf("AccueilLangage");
+
+    var lease = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Bail");
+    var registry = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Registre");
+}
+
+
+
+@Html.Partial("/Views/Partials/SmallHeader.cshtml")
+
+<hr />
+
+<div>
+    @Html.ActionLink("Consulter le registre", "GetLeases", "MainSurface")
+</div>
