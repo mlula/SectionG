@@ -24,12 +24,12 @@ namespace SectionG.SurfaceControllers
     {
 
         [System.Web.Mvc.HttpPost]
-        public ActionResult SubmitLease()
+        public ActionResult SubmitLease(Lease lease)
         {
             
             // Pick up parameters
             var price = -1;
-            int.TryParse(Request.Params["price"], out price);
+            int.TryParse(Request.Params["Prix"], out price);
 
             // Validation
             var hasError = false;
@@ -61,39 +61,43 @@ namespace SectionG.SurfaceControllers
 
             // Database entry
             var db = new PetaPoco.Database("umbracoDbDSN");
-            var lease = new Lease();
-            // lease.Id = "";
-            lease.Price = price;
+ 
+            // Champs calculés
             lease.DateCreated = DateTime.Now;
             lease.IpAddress = Request.ServerVariables["REMOTE_ADDR"];
-            
+
+            // TODO: Mettre les valeurs du formulaire
             lease.StartDate = new DateTime(2014, 7, 1);
             lease.EndDate = new DateTime(2015, 7, 1);
-            lease.AddressNbr = "";
-            lease.Street = "";
-            lease.AppartmentNbr = "";
-            lease.Street = "";
-            lease.PostalCode = "";
-            lease.City = "Montréal";
 
             Borough borough = new Borough();
             borough.Id = 9;
             borough.Name = "Mercier–Hochelaga-Maisonneuve";
             lease.Borough = borough;
+            lease.BoroughId = 9;
             lease.Details = "";
             lease.Inclusions = "";
 
-            db.Insert(lease);
+            try
+            {
+                db.Insert(lease);
+            }
+            catch (Exception ex)
+            {
+                return Content("Insert error: " + ex.Message);
+            }
 
-            return Content("ok");
-            
+            var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease").Where("Street = @0", lease.Street));
+
+            return Json(listOfLeases);            
+            //return Content("ok");            
         }
 
         [System.Web.Mvc.HttpPost]
-        public ActionResult GetLeases()
+        public ActionResult GetLeases(Lease lease)
         {            
             var db = new PetaPoco.Database("umbracoDbDSN");
-            var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease"));
+            var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease").Where("Street = @0", lease.Street));
 
             return Json(listOfLeases);
         }

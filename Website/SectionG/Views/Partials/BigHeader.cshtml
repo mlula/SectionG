@@ -6,15 +6,14 @@
     // Roots
     var site = Model.Content.AncestorOrSelf("Site");
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
-
-    var contact = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Contact");
-    
+    var contact = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Contact");       
 }
 
 <header style="text-align: center; position: relative;">
 
-    <div style="position: absolute; right: 0px; padding-top: 30px;">
-        <a href="@contact.Url">@contact.AsDynamic().titre</a> | 
+    <div style="position: absolute; right: 0px; padding-top: 30px;">        
+        <a href="@contact.Url">@contact.AsDynamic().titre</a> 
+
         @if (lang.Name.ToLowerInvariant() == "en")
         {
             <a href="/fr/">Français</a>

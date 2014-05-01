@@ -41,17 +41,18 @@
     <script src="//cdn.datatables.net/plug-ins/505bef35b56/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript" src="/Scripts/main.js"></script>
+    <script type="text/javascript" src="/Scripts/grid.js"></script>
        
     <!-- Optional theme -->
     @*<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">*@
     
-    <link href="//code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/Css/style.css">    
-</head>
-<body>
-        
-    <div class="container">
+    <link href="//code.jquery.com/ui/1.10.3/themes/flick/jquery-ui.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="/Css/style.css">    
+    <link rel="stylesheet" href="/Css/grid.css">
+</head>
+<body>       
+    <div class="container">
         @RenderBody()
 
         @Html.Partial("/Views/Partials/Footer.cshtml")

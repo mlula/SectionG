@@ -20,35 +20,7 @@
         leaseText = "[EN] Par ici vous pouvez entrer votre bail et ses modalités pour participer au registre volontaire des baux!";
         registryText = "[EN] Par ici vous pouvez consulter le registre des baux afin de valider le prix de votre bail selon l'historique.";
     }
-
-    // Get the current database object
-    var db = ApplicationContext.Current.DatabaseContext.Database;
-    // Fetch a collection of contacts from the db.
-    
-    var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease"));
 }
-<link rel="stylesheet" href="~/Css/grid.css">
-<script src="~/Scripts/grid.js"></script>
-
-<script type="text/javascript">
-    /* Table initialisation */
-    $(document).ready(function () {
-        $('#example').dataTable({            
-            "sDom": "<'row'<'col-6'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>",
-            "sPaginationType": "bootstrap",
-            "aLengthMenu": [5, 10, 25, 50],
-            "oLanguage": {
-                "sLengthMenu": "_MENU_ items par page",
-                "sInfo": "Montrer de _START_ à _END_ de _TOTAL_ entrées",
-                "sSearch": "Rechercher",
-                "oPaginate": {
-                    "sPrevious": "Précédent",
-                    "sNext": "Suivant"
-                }
-            }
-        });
-    });
-</script>
 
 @Html.Partial("/Views/Partials/SmallHeader.cshtml")
 
@@ -61,24 +33,26 @@
 
 <hr />
 
-<div>
-    <table class="table table-striped table-bordered" id="example" role="grid">
+<div id="step1" class="step">
+    <h1>Entrez une adresse</h1>
+
+    @Html.Partial("/Views/Partials/AddressFields.cshtml")
+
+    <div><button id="submit1" name="submit1" class="btn btn-primary" onclick="goToRegistry();">Button</button></div>
+</div>
+
+<div id="step2" class="step" style="display: none;">
+    <h1>Consultez le registre</h1>
+
+    <table class="table table-striped table-bordered" id="registre" role="grid">
         <thead>
             <tr>
+                <th>Adresse</th>
                 <th>Prix</th>
-                <th>Date</th>
-                <th>Adresse IP</th>
+                <th>Date créé</th>
             </tr>
             </thead>
         <tbody role="alert">
-            @foreach (Lease leaseItem in listOfLeases)
-            {
-                <tr>
-                    <td>@leaseItem.Price $</td>
-                    <td>@leaseItem.DateCreated.ToString("dd MMMM yyyy")</td>
-                    <td>@leaseItem.IpAddress</td>
-                </tr>
-            }
         </tbody>
     </table>
 </div>

@@ -2823,6 +2823,8 @@
     <Content Include="packages.config" />
     <Content Include="Views\RechercheRegistre.cshtml" />
     <Content Include="Views\Partials\AddressFields.cshtml" />
+    <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\Page.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
