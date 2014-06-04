@@ -20,7 +20,6 @@ namespace SectionG.Code.Pocos
         public string PostalCode { get; set; }
         public string City { get; set; }        
         public int BoroughId { get; set; }
-        [ResultColumn] public Borough Borough { get; set; }        
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Details { get; set; }

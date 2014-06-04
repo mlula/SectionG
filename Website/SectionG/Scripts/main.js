@@ -63,18 +63,19 @@ function goToRegistry() {
         var obj = JSON.parse(result);
         var aaData = [];
         $.each(obj, function () {
+
             var aData = [];
 
             // Mettre le data dans la table
-            if (this['AppartmentNumber'] != null && this['AppartmentNumber'] != '')
+            if (this['AppartmentNumber'] != null && this['AppartmentNumber'] != '') {
                 aData.push(this["AddressNumber"] + " " + this["Street"] + " #" + this["AppartmentNumber"]);
+            }
             else
                 aData.push(this["AddressNumber"] + " " + this["Street"]);
-
+            
+            aData.push(getDate(this["StartDate"]));
+            aData.push(getDate(this["EndDate"]));
             aData.push(this["Price"] + " $");
-
-            var myDate = new Date(parseInt(this["DateCreated"].substr(6)));
-            aData.push(myDate.getFullYear() + "-" + (myDate.getMonth() < 10 ? '0' : '') + (myDate.getMonth() + 1) + "-" + (myDate.getDate() < 10 ? '0' : '') + myDate.getDate());
 
             aaData.push(aData);
         });
@@ -114,6 +115,11 @@ function ajaxPost(url, data, callBack) {
     });
 }
 
+function getDate(jsonDate) {
+    var date = new Date(parseInt(jsonDate.substr(6)));
+    return date.getUTCFullYear() + "-" + (date.getUTCMonth() < 10 ? '0' : '') + (date.getUTCMonth() + 1) + "-" + (date.getUTCDate() < 10 ? '0' : '') + date.getUTCDate();
+}
+
 function Lease() {
     var self = this;
     self.Price = $("#Prix").val();
@@ -122,9 +128,11 @@ function Lease() {
     self.Street = $("#Rue").val();
     self.PostalCode = $("#CodePostal").val();
     self.City = $("#Ville").val();
-    // self.Borough
+    self.BoroughId = $("#Arrondissement").val();
     self.StartDate = $("#dateDebutAlt").val();
-    self.EndDate = $("dateEndAlt").val();
+    console.log("Start Date = " + self.StartDate);
+    self.EndDate = $("#dateFinAlt").val();
+    console.log("End Date = " + self.EndDate);
     self.Detail = $("details").val();
     // self.Inclusions
 }

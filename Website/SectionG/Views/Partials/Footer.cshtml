@@ -7,7 +7,7 @@
     var site = Model.Content.AncestorOrSelf("Site");
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
 
-    var menuNodes = lang.Children.Where(x => x.DocumentTypeAlias != "Bail" && x.DocumentTypeAlias != "Registre" && x.DocumentTypeAlias != "Contact");
+    var menuNodes = lang.Children.Where(x => x.DocumentTypeAlias != "Bail" && x.DocumentTypeAlias != "Registre" && x.DocumentTypeAlias != "Contact" && x.DocumentTypeAlias != "Carte");
     var first = true;    
     
 }

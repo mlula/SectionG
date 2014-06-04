@@ -66,15 +66,7 @@ namespace SectionG.SurfaceControllers
             lease.DateCreated = DateTime.Now;
             lease.IpAddress = Request.ServerVariables["REMOTE_ADDR"];
 
-            // TODO: Mettre les valeurs du formulaire
-            lease.StartDate = new DateTime(2014, 7, 1);
-            lease.EndDate = new DateTime(2015, 7, 1);
-
-            Borough borough = new Borough();
-            borough.Id = 9;
-            borough.Name = "Mercier–Hochelaga-Maisonneuve";
-            lease.Borough = borough;
-            lease.BoroughId = 9;
+            // TODO: Mettre les valeurs du formulaire           
             lease.Details = "";
             lease.Inclusions = "";
 
@@ -96,8 +88,15 @@ namespace SectionG.SurfaceControllers
         [System.Web.Mvc.HttpPost]
         public ActionResult GetLeases(Lease lease)
         {            
-            var db = new PetaPoco.Database("umbracoDbDSN");
-            var listOfLeases = db.Fetch<Lease>(new Sql().Select("*").From("_sg_Lease").Where("Street = @0", lease.Street));
+            var db = new PetaPoco.Database("umbracoDbDSN");            
+           
+            Sql sql = new Sql().Select("*").From("_sg_Lease");
+            if (!string.IsNullOrEmpty(lease.Street)) sql = sql.Where("Street = @0", lease.Street);
+            if (!string.IsNullOrEmpty(lease.AddressNumber)) sql = sql.Where("AddressNumber = @0", lease.AddressNumber);
+            if (!string.IsNullOrEmpty(lease.AppartmentNumber)) sql = sql.Where("AppartmentNumber = @0", lease.AppartmentNumber);
+            if (!string.IsNullOrEmpty(lease.PostalCode)) sql = sql.Where("PostalCode = @0", lease.PostalCode);
+
+            var listOfLeases = db.Fetch<Lease>(sql);
 
             return Json(listOfLeases);
         }

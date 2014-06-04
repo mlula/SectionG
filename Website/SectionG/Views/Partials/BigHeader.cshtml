@@ -6,7 +6,8 @@
     // Roots
     var site = Model.Content.AncestorOrSelf("Site");
     var lang = Model.Content.AncestorOrSelf("AccueilLangage");
-    var contact = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Contact");       
+    var contact = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Contact");
+    //var carte = lang.Children.FirstOrDefault(x => x.DocumentTypeAlias == "Carte"); 
 }
 
 <header style="text-align: center; position: relative;">

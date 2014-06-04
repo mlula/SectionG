@@ -43,3 +43,8 @@
         max-width: 730px;
     }
 }
+
+/* carte */
+#map-canvas {
+    height: 500px;
+}
