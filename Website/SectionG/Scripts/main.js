@@ -127,7 +127,7 @@ function Lease() {
     self.AppartmentNumber = $("#Appt").val();
     self.Street = $("#Rue").val();
     self.PostalCode = $("#CodePostal").val();
-    self.City = $("#Ville").val();
+    self.City = "Montréal";
     self.BoroughId = $("#Arrondissement").val();
     self.StartDate = $("#dateDebutAlt").val();
     console.log("Start Date = " + self.StartDate);
